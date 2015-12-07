@@ -142,7 +142,9 @@ audio:not([controls]), [hidden], template {
   display: none;
   height: 0
 }
-
+*,*:after,*:before{
+  @include box-sizing($bb);
+}
 mark {
   background: none
 }
@@ -227,7 +229,7 @@ select {
 img {
   max-width: 100%;
   height: auto;
-  width: auto \9
+  width: auto;
 }
 
 a > img {

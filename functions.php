@@ -52,24 +52,13 @@ if (!current_user_can('update_plugins')) { // checks to see if current user can 
     add_filter( 'pre_option_update_core', create_function( '$a', "return null;" ) );
 }
 
-//ADD WP CODEX SEARCH FORM TO DASHBOARD HEADER
-function wp_codex_search_form() {
-    echo '<form target="_blank" method="get" action="http://wordpress.org/search/do-search.php" class="alignright" style="margin: 0;position: absolute;right: 250px;z-index: 100000;top: -30px;">
-        <input type="text" onblur="this.value=(this.value==\'\') ? \'Search the Codex\' : this.value;" onfocus="this.value=(this.value==\'Search the Codex\') ? \'\' : this.value;" maxlength="150" value="Search the Codex" name="search" class="text"> <input type="submit" value="Go" class="button" />
-    </form>';
-}
-if ( current_user_can('manage_options') ) {
-    add_filter( 'in_admin_header', 'wp_codex_search_form', 10 );
-}
-
-
 /* BEGIN: Theme config params*/
 define ('HOME_PAGE_ID', get_option('page_on_front'));
 define ('BLOG_ID', get_option('page_for_posts'));
 define ('POSTS_PER_PAGE', get_option('posts_per_page'));
 if(class_exists('Woocommerce')) :
-define ('SHOP_ID', get_option('woocommerce_shop_page_id'));
-define ('ACCOUNT_ID', get_option('woocommerce_myaccount_page_id'));
+    define ('SHOP_ID', get_option('woocommerce_shop_page_id'));
+    define ('ACCOUNT_ID', get_option('woocommerce_myaccount_page_id'));
 endif;
 /* END: Theme config params */
 
@@ -112,9 +101,9 @@ function gebid($post_id, $num){
     $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
     $words = explode(' ', $the_excerpt, $excerpt_length + 1);
     if(count($words) > $excerpt_length) :
-    array_pop($words);
-    array_push($words, '…');
-    $the_excerpt = implode(' ', $words);
+        array_pop($words);
+        array_push($words, '…');
+        $the_excerpt = implode(' ', $words);
     endif;
     $the_excerpt = '<p>' . $the_excerpt . '</p>';
     return $the_excerpt;
@@ -189,11 +178,6 @@ $bar = array(
 );
 register_sidebar($bar);
 
-function remove_footer_admin () {
-    echo 'Powered by <a href="http://www.wordpress.org" target="_blank">WordPress</a>';
-}
-add_filter('admin_footer_text', 'remove_footer_admin');
-
 function remove_default_description($bloginfo) {
     $default_tagline = 'Just another WordPress site';
     return ($bloginfo === $default_tagline) ? '' : $bloginfo;
@@ -238,7 +222,7 @@ function transliterate($textcyr = null, $textlat = null) {
         'Y','Ye', 'Yi', 'Zh', 'Ch', 'Sht', 'Sh', 'Yu', 'A', 'B', 'V', 'G', 'D', 'E', 'Z', 'I', 'J', 'I', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'c', 'Y', 'X', 'Ya');
     if($textcyr) return str_replace($cyr, $lat, $textcyr);
     else if($textlat) return str_replace($lat, $cyr, $textlat);
-        else return null;
+    else return null;
 }
 
 //return header 403 for wrong login
@@ -253,7 +237,8 @@ if( function_exists('acf_add_options_page') ) {
         'menu_title' => 'Theme Settings',
         'menu_slug' => 'acf-theme-settings',
         'capability' => 'edit_posts',
-        'redirect' => false
+        'redirect' => false,
+        'icon_url' => 'dashicons-shield-alt',
     ));
     acf_add_options_sub_page(array(
         'page_title' => 'Header',
