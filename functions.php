@@ -66,8 +66,8 @@ endif;
 add_theme_support( 'post-thumbnails' );
 
 //custom theme url
-function theme(){
-    return ($_SERVER['REMOTE_ADDR']=='127.0.0.1'?site_url():'') . str_replace(site_url(), '', get_stylesheet_directory_uri());
+function theme($filepath = NULL){
+    return preg_replace( '(https?://)', '//', get_stylesheet_directory_uri() . ($filepath?'/' . $filepath:'') );
 }
 
 //Body class
