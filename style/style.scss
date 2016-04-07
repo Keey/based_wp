@@ -30,6 +30,14 @@
 $bb: border-box;
 $font: 'Arial', sans-serif;
 
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   -khtml-border-radius: $radius;
