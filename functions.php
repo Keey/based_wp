@@ -93,22 +93,6 @@ function new_body_classes( $classes ){
 }
 add_filter( 'body_class', 'new_body_classes' );
 
-//excerpt custom
-function gebid($post_id, $num){
-    $the_post = get_post($post_id); //Gets post ID
-    $the_excerpt = $the_post->post_content; //Gets post_content to be used as a basis for the excerpt
-    $excerpt_length = $num; //Sets excerpt length by word count
-    $the_excerpt = strip_tags(strip_shortcodes($the_excerpt)); //Strips tags and images
-    $words = explode(' ', $the_excerpt, $excerpt_length + 1);
-    if(count($words) > $excerpt_length) :
-        array_pop($words);
-        array_push($words, '…');
-        $the_excerpt = implode(' ', $words);
-    endif;
-    $the_excerpt = '<p>' . $the_excerpt . '</p>';
-    return $the_excerpt;
-}
-
 //remove ID in menu list
 add_filter('nav_menu_item_id', 'clear_nav_menu_item_id', 10, 3);
 function clear_nav_menu_item_id($id, $item, $args) {
@@ -120,6 +104,21 @@ add_action( 'wp_print_styles', 'voodoo_deregister_styles', 100 );
 function voodoo_deregister_styles() {
     wp_deregister_style( 'contact-form-7' );
 }
+//REMOVE AUTO-TOP
+if(defined('WPCF7_VERSION')) {
+    function maybe_reset_autop( $form ) {
+        $form_instance = WPCF7_ContactForm::get_current();
+        $manager = WPCF7_ShortcodeManager::get_instance();
+        $form_meta = get_post_meta( $form_instance->id(), '_form', true );
+        $form = $manager->do_shortcode( $form_meta );
+        $form_instance->set_properties( array(
+            'form' => $form
+        ) );
+        return $form;
+    }
+    add_filter( 'wpcf7_form_elements', 'maybe_reset_autop' );
+}
+
 
 //custom SEO title
 function seo_title(){
@@ -149,14 +148,16 @@ foreach (array('term_description', 'link_description', 'link_notes', 'user_descr
 function tt_add_scripts() {
     if (!is_admin()) {
         wp_deregister_script( 'jquery' );
-        wp_register_script( 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js');
-        wp_enqueue_script( 'jquery' );
     }
+
+    wp_enqueue_script('jquery',  theme(). '/js/jquery.js', false, null, false);
+    wp_enqueue_script('font_js', theme().'/style/font/font.js', array('jquery'), '', true );
     wp_enqueue_script('lib_min', theme().'/js/lib.js', array('jquery'), '', true );
     wp_enqueue_script('js_init', theme().'/js/init.js', array('jquery'), '', true );
-    wp_enqueue_script('googlemaps', '//maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false', array(), '', FALSE );
+    wp_enqueue_script('googlemaps', '//maps.googleapis.com/maps/api/js?v=3.exp', array(), '', FALSE );
 
     wp_enqueue_style('tt_style', theme().'/style/style.css');
+    wp_enqueue_style('font_style', theme().'/style/font/font.css');
 }
 add_action('wp_enqueue_scripts', 'tt_add_scripts');
 
