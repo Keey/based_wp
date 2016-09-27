@@ -1,42 +1,236 @@
-@mixin declare-font-face($font-family, $font-filename, $font-weight : normal, $font-style :normal) {
-  @font-face {
-    font-family: '#{$font-family}';
-    src: url('fonts/#{$font-filename}.eot');
-    src: url('fonts/#{$font-filename}.eot?#iefix') format('embedded-opentype'),
-    url('fonts/#{$font-filename}.woff') format('woff'),
-    url('fonts/#{$font-filename}.ttf') format('truetype'),
-    url('fonts/#{$font-filename}.svg##{$font-family}') format('svg');
-    font-weight: $font-weight;
-    font-style: $font-style
+// Flexbox Mixins
+@mixin flexbox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+//%flexbox { @include flexbox; }
+@mixin inline-flex {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+//%inline-flex { @include inline-flex; }
+
+// Flexbox Direction
+
+@mixin flex-direction($value: row) {
+  @if $value == row-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal;
+  } @else if $value == column {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+  } @else if $value == column-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+  } @else {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+  }
+  -webkit-flex-direction: $value;
+  -moz-flex-direction: $value;
+  -ms-flex-direction: $value;
+  flex-direction: $value;
+}
+
+// Flexbox Wrap
+
+@mixin flex-wrap($value: nowrap) {
+  // No Webkit Box fallback.
+  -webkit-flex-wrap: $value;
+  -moz-flex-wrap: $value;
+  @if $value == nowrap {
+    -ms-flex-wrap: none;
+  } @else {
+    -ms-flex-wrap: $value;
+  }
+  flex-wrap: $value;
+}
+
+// Flexbox Flow (shorthand)
+
+@mixin flex-flow($values: (row nowrap)) {
+  // No Webkit Box fallback.
+  -webkit-flex-flow: $values;
+  -moz-flex-flow: $values;
+  -ms-flex-flow: $values;
+  flex-flow: $values;
+}
+
+// Flexbox Order
+
+@mixin order($int: 0) {
+  -webkit-box-ordinal-group: $int + 1;
+  -webkit-order: $int;
+  -moz-order: $int;
+  -ms-flex-order: $int;
+  order: $int;
+}
+
+// Flexbox Grow
+
+@mixin flex-grow($int: 0) {
+  -webkit-box-flex: $int;
+  -webkit-flex-grow: $int;
+  -moz-flex-grow: $int;
+  -ms-flex-positive: $int;
+  flex-grow: $int;
+}
+
+// Flexbox Shrink
+
+@mixin flex-shrink($int: 1) {
+  -webkit-flex-shrink: $int;
+  -moz-flex-shrink: $int;
+  -ms-flex-negative: $int;
+  flex-shrink: $int;
+}
+
+// Flexbox Basis
+@mixin flex-basis($value: auto) {
+  -webkit-flex-basis: $value;
+  -moz-flex-basis: $value;
+  -ms-flex-preferred-size: $value;
+  flex-basis: $value;
+}
+
+// Flexbox "Flex" (shorthand)
+@mixin flex($fg: 1, $fs: null, $fb: null) {
+  $fg-boxflex: $fg;
+  @if type-of($fg) == 'list' {
+    $fg-boxflex: nth($fg, 1);
+  }
+  -webkit-box-flex: $fg-boxflex;
+  -webkit-flex: $fg $fs $fb;
+  -moz-box-flex: $fg-boxflex;
+  -moz-flex: $fg $fs $fb;
+  -ms-flex: $fg $fs $fb;
+  flex: $fg $fs $fb;
+}
+
+// Flexbox Justify Content
+
+@mixin justify-content($value: flex-start) {
+  @if $value == flex-start {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+  } @else if $value == flex-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+  } @else if $value == space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-pack: distribute;
+  } @else {
+    -webkit-box-pack: $value;
+    -ms-flex-pack: $value;
+  }
+  -webkit-justify-content: $value;
+  -moz-justify-content: $value;
+  justify-content: $value;
+}
+
+// Flexbox Align Items
+@mixin align-items($value: stretch) {
+  @if $value == flex-start {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+  } @else if $value == flex-end {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+  } @else {
+    -webkit-box-align: $value;
+    -ms-flex-align: $value;
+  }
+  -webkit-align-items: $value;
+  -moz-align-items: $value;
+  align-items: $value;
+}
+
+// Flexbox Align Self
+@mixin align-self($value: auto) {
+  // No Webkit Box Fallback.
+  -webkit-align-self: $value;
+  -moz-align-self: $value;
+  @if $value == flex-start {
+    -ms-flex-item-align: start;
+  } @else if $value == flex-end {
+    -ms-flex-item-align: end;
+  } @else {
+    -ms-flex-item-align: $value;
+  }
+  align-self: $value;
+}
+
+// Flexbox Align Content
+@mixin align-content($value: stretch) {
+  -webkit-align-content: $value;
+  -moz-align-content: $value;
+  @if $value == flex-start {
+    -ms-flex-line-pack: start;
+  } @else if $value == flex-end {
+    -ms-flex-line-pack: end;
+  } @else {
+    -ms-flex-line-pack: $value;
+  }
+  align-content: $value;
+}
+
+/*
+Flexbox grid @mixin
+EXAMPLE
+.flexbox {
+    @include boxGrid(5, 4%);
+}
+*/
+@function strip-units($value) {
+  @return ($value / ($value * 0 + 1));
+}
+
+@mixin boxGrid($columnNumber, $spacingPercent) {
+  $contentPercent: 100%;
+  $sideMargin: ($spacingPercent/2);
+  $marginInt: strip-units($sideMargin);
+  @include justify-content(flex-start);
+  @include flex-flow(wrap);
+  @include transition();
+  @include flexbox();
+  margin: #{0} -$sideMargin;
+  width: $contentPercent + $spacingPercent;
+  > * {
+    width: ($contentPercent/$columnNumber) - $spacingPercent;
+    margin: 0 #{$sideMargin} ($marginInt + ($marginInt / $columnNumber) * 1em)
   }
 }
 
-@mixin svg-font-face($font-family, $font-filename, $font-weight : normal, $font-style :normal) {
-  @font-face {
-    font-family: '#{$font-family}';
-    src: url('fonts/#{$font-filename}.svg##{$font-family}') format('svg');
-    font-weight: $font-weight;
-    font-style: $font-style
-  }
-}
-
-//Using @include declare-font-face('FontName', 'font-filename', 400);
-
-//@media screen and (-webkit-min-device-pixel-ratio:0) {
-//Using @include svg-font-face('FontName', 'font-filename', 400);
-//}
-
+//reset
 /*variable*/
 $bb: border-box;
-$font: 'Arial', sans-serif;
+$lato: 'Lato', sans-serif;
+$font: 'Montserrat', sans-serif;
 
 @mixin placeholder {
-  &::-webkit-input-placeholder {@content}
-  &:-moz-placeholder           {@content}
-  &::-moz-placeholder          {@content}
-  &:-ms-input-placeholder      {@content}
+  &::-webkit-input-placeholder {
+    @content
+  }
+  &:-moz-placeholder {
+    @content
+  }
+  &::-moz-placeholder {
+    @content
+  }
+  &:-ms-input-placeholder {
+    @content
+  }
 }
-
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -150,9 +344,11 @@ audio:not([controls]), [hidden], template {
   display: none;
   height: 0
 }
-*,*:after,*:before{
+
+*, *:after, *:before {
   @include box-sizing($bb);
 }
+
 mark {
   background: none
 }
@@ -187,14 +383,21 @@ html, body {
 }
 
 html {
+  min-height: 100%;
   > body {
     height: auto;
-    min-height: 100%
+    min-height: 100%;
+    @include flexbox();
+    @include flex-direction(column);
   }
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   -webkit-text-size-adjust: none;
   -ms-text-size-adjust: none
+}
+
+#main {
+  @include flex-grow(1);
 }
 
 a {
@@ -222,7 +425,6 @@ input[type='search'],
 button,
 textarea,
 select {
-  -webkit-appearance: none;
   outline: 0 none;
   @include box-sizing(border-box);
 }
@@ -306,24 +508,12 @@ html[xmlns] .cfx {
   width: 0
 }
 
-// Wordpress classes
 .alignleft {
   float: left
 }
 
 .alignright {
   float: right
-}
-
-.aligncenter {
-  margin-left: auto;
-  margin-right: auto
-}
-
-img.aligncenter {
-  margin-left: auto;
-  margin-right: auto;
-  display: block
 }
 
 .googlemap img {
@@ -360,6 +550,7 @@ strong {
       top: 0;
       width: 100%;
       z-index: -1;
+      border: none;
     }
   }
 }
@@ -374,49 +565,12 @@ textarea, button, a, input, .btn {
 
 body {
   position: relative;
-  font: 400 14px/20px $font;
-  color: #000;
-}
-
-.wpcf7 {
-  .screen-reader-response {
-    display: none !important
-  }
-  .wpcf7-not-valid-tip {
-    background: #eee;
-    color: #ff5f5f;
-    font: 500 12px/45px 'Museo Sans';
-    left: 0;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    top: 0;
-  }
-  .wpcf7-response-output {
-    background: #fff;
-    padding: 2%;
-    float: left;
-    width: 96%;
-    display: none;
-    margin: 20px 0;
-    text-align: center;
-    &.wpcf7-validation-errors {
-      background: #FF5F5F;
-      color: #fff
-    }
-    &.wpcf7-mail-sent-ng {
-      background: #1091ae;
-      color: #fff
-    }
-    &.wpcf7-mail-sent-ok {
-      background: #16A085;
-      color: #fff
-    }
-  }
-  .wpcf7-form-control-wrap {
-    display: block !important;
-    position: relative;
-  }
+  font: 300 15px/20px $font;
+  color: #999999;
+  background: #fff;
+  @include flexbox();
+  @include flex-direction(column);
+  @include flex(auto);
 }
 
 .selbel_w {
@@ -479,20 +633,65 @@ body {
   margin: 0 auto;
   max-width: 96%;
   position: relative;
-  width: 960px;
+  width: 1140px;
 }
+
+ul {
+  margin: 0;
+}
+
+.hide {
+  display: none;
+}
+
+$space-between: space-between;
+$space-around: space-around;
+
+
+.wpcf7 {
+  .screen-reader-response {
+    display: none !important
+  }
+  .wpcf7-not-valid-tip {
+    background: #eee;
+    color: #ff5f5f;
+    font: 500 12px/45px 'Museo Sans';
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+  }
+  .wpcf7-response-output {
+    background: #fff;
+    padding: 2%;
+    float: left;
+    width: 96%;
+    display: none;
+    margin: 20px 0;
+    text-align: center;
+    &.wpcf7-validation-errors {
+      background: #FF5F5F;
+      color: #fff
+    }
+    &.wpcf7-mail-sent-ng {
+      background: #1091ae;
+      color: #fff
+    }
+    &.wpcf7-mail-sent-ok {
+      background: #16A085;
+      color: #fff
+    }
+  }
+  .wpcf7-form-control-wrap {
+    display: block !important;
+    position: relative;
+  }
+}
+
 
 /*=== Start Style ===*/
 
-
-
-footer {
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  overflow: hidden;
-}
 
 @media screen and (max-width: 1024px) {
 

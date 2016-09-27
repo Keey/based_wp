@@ -17,10 +17,10 @@ if(is_date()){
     $queryname = get_the_title(BLOG_ID);
 } ?>
 <?php if($queryname) : echo '<h1>'. $queryname. '</h1>'; endif; ?>
-<section class="content row cfx">
+<section class="content row">
     <article>
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-            <div class="blogpost cfx">
+            <div class="blogpost">
                 <?php if ( has_post_thumbnail() ) { ?>
                     <div class="alignleft">
                         <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
@@ -28,7 +28,7 @@ if(is_date()){
                 <?php } ?>
                 <div class="excerpt">
                     <a href="<?php the_permalink(); ?>" class="blogtitle"><?php the_title(); ?></a>
-                    <div class="blogmeta cfx">
+                    <div class="blogmeta">
                         <div class="author"><?php the_author(); ?></div>
                         <div class="ccount"><?php comments_number( 'No comments', 'One comment', '% comments' ); ?></div>
                         <time><?php the_date( 'F j'); ?><span>, <?php echo get_the_date('Y'); ?></span></time>
