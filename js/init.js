@@ -8,4 +8,3 @@ $(document).ready(function () {
     FastClick.attach(document.body);
 });
 
-$(window).load(function(){});
