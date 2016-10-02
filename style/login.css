@@ -1,0 +1,12 @@
+body.login {
+    background: url('../img/admin_bg.jpg') repeat;
+    -webkit-background-size: 100%;
+    background-size: 100%;
+}
+
+.login #backtoblog, .login #nav {
+    font-size: 15px;
+    padding: 10px 25px;
+    background: #fff;
+    border-right: 5px solid #d50000;
+}

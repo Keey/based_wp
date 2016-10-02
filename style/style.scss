@@ -214,8 +214,7 @@ EXAMPLE
 //reset
 /*variable*/
 $bb: border-box;
-$lato: 'Lato', sans-serif;
-$font: 'Montserrat', sans-serif;
+$font: sans-serif;
 
 @mixin placeholder {
   &::-webkit-input-placeholder {
