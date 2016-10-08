@@ -284,5 +284,12 @@ function fix_svg_thumb_display() {
 }
 add_action('admin_head', 'fix_svg_thumb_display');
 
+//remove p tag > image
+function filter_ptags_on_images($content){
+    return preg_replace('/<p>\\s*?(<a .*?><img.*?><\\/a>|<img.*?>)?\\s*<\\/p>/s', '\1', $content);
+}
+add_filter('the_content', 'filter_ptags_on_images');
+
+
 //images sizes
 //add_image_size( 'example_name', '960', '540', true );
