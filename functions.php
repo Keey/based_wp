@@ -274,15 +274,15 @@ function cc_mime_types($mimes) {
 }
 add_filter('upload_mimes', 'cc_mime_types');
 
-function fix_svg_thumb_display() {
-    echo '
-    td.media-icon img[src$=".svg"], img[src$=".svg"].attachment-post-thumbnail { 
-      width: 100% !important; 
-      height: auto !important; 
-    }
-  ';
+function custom_admin_head() {
+
+    $css = '';
+
+    $css = 'td.media-icon img[src$=".svg"] { width: 100% !important; height: auto !important; }';
+
+    echo '<style type="text/css">'.$css.'</style>';
 }
-add_action('admin_head', 'fix_svg_thumb_display');
+add_action('admin_head', 'custom_admin_head');
 
 //remove p tag > image
 function filter_ptags_on_images($content){
