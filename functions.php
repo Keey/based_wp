@@ -154,7 +154,6 @@ function tt_add_scripts() {
     wp_enqueue_script('font_js', theme().'/style/font/font.js', array('jquery'), '', true );
     wp_enqueue_script('lib_min', theme().'/js/lib.js', array('jquery'), '', true );
     wp_enqueue_script('js_init', theme().'/js/init.js', array('jquery'), '', true );
-    wp_enqueue_script('googlemaps', '//maps.googleapis.com/maps/api/js?v=3.exp', array(), '', FALSE );
 
     wp_enqueue_style('tt_style', theme().'/style/style.css');
     wp_enqueue_style('font_style', theme().'/style/font/font.css');
