@@ -11,7 +11,7 @@ audio, canvas, video, progress {
   *zoom: 1
 }
 
-audio:not([controls]), [hidden], template {
+audio:not([controls]), [hidden], template,.jEmpty {
   display: none;
   height: 0
 }
