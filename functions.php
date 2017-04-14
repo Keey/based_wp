@@ -29,6 +29,14 @@ update_option('uploads_use_yearmonth_folders', 0);
 
 add_filter( 'show_admin_bar', '__return_false' );
 
+
+function my_acf_init() {
+//    acf_update_setting('google_api_key', 'xxx');
+	acf_update_setting( 'enqueue_select2', false );
+}
+add_action( 'acf/init', 'my_acf_init' );
+/*
+
 // remove wp version param from any enqueued scripts
 function vc_remove_wp_ver_css_js( $src ) {
     if ( strpos( $src, 'ver=' ) )
