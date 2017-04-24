@@ -37,10 +37,10 @@ if(is_date()){
                 </div>
             </div>
         <?php endwhile;
-        wp_pagenavi();
+        //wp_pagenavi();
         endif;?>
     </article>
-    <aside class="alignright">
+    <aside>
         <?php dynamic_sidebar('Blog Sidebar'); ?>
     </aside>
 </section>
