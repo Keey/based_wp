@@ -12,6 +12,7 @@ header('X-UA-Compatible: IE=Edge,chrome=1');
 <meta name="MobileOptimized" content="width" />
 <meta name="HandheldFriendly" content="True"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no">
 <?php wp_head(); ?>
 <?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?>
 </head>
