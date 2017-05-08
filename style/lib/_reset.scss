@@ -360,6 +360,11 @@ ul {
   }
 }
 
+a[href^=tel] {
+text-decoration:inherit;
+color: inherit;
+}
+
 .row {
   margin: 0 auto;
   max-width: 96%;
