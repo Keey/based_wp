@@ -33,7 +33,7 @@ if(is_date()){
                         <div class="ccount"><?php comments_number( 'No comments', 'One comment', '% comments' ); ?></div>
                         <time><?php the_date( 'F j'); ?><span>, <?php echo get_the_date('Y'); ?></span></time>
                     </div>
-                    <?php the_content('Read More'); ?>
+                  <?php echo wp_trim_words( get_the_content(), 40, '... <a  href="'. get_permalink() .'" class="rm">Learn More</a>'  ); ?>
                 </div>
             </div>
         <?php endwhile;
