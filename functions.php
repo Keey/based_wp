@@ -32,33 +32,9 @@ add_filter( 'show_admin_bar', '__return_false' );
 
 function my_acf_init() {
 //    acf_update_setting('google_api_key', 'xxx');
-	acf_update_setting( 'enqueue_select2', false );
 }
 add_action( 'acf/init', 'my_acf_init' );
-/*
 
-// remove wp version param from any enqueued scripts
-function vc_remove_wp_ver_css_js( $src ) {
-    if ( strpos( $src, 'ver=' ) )
-        $src = remove_query_arg( 'ver', $src );
-    return $src;
-}
-add_filter( 'style_loader_src', 'vc_remove_wp_ver_css_js', 9999 );
-add_filter( 'script_loader_src', 'vc_remove_wp_ver_css_js', 9999 );
-
-// changing the logo link from wordpress.org to your site
-function tt_login_url() {  return home_url(); }
-// changing the alt text on the logo to show your site name
-function tt_login_title() { return get_option( 'blogname' ); }
-
-add_filter( 'login_headerurl', 'tt_login_url' );
-add_filter( 'login_headertitle', 'tt_login_title' );
-
-// REMOVE THE WORDPRESS UPDATE NOTIFICATION FOR ALL USERS EXCEPT SYSADMIN
-if (!current_user_can('update_plugins')) { // checks to see if current user can update plugins
-    add_action( 'init', create_function( '$a', "remove_action( 'init', 'wp_version_check' );" ), 2 );
-    add_filter( 'pre_option_update_core', create_function( '$a', "return null;" ) );
-}
 
 /* BEGIN: Theme config params*/
 define ('HOME_PAGE_ID', get_option('page_on_front'));
