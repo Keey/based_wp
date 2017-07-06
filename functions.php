@@ -273,6 +273,12 @@ function filter_ptags_on_images($content){
 }
 add_filter('the_content', 'filter_ptags_on_images');
 
+//light function fo wp_get_attachment_image_src()
+function image_src($id, $size = 'full', $background_image = false, $height = false) {
+    if ($image = wp_get_attachment_image_src($id, $size, true)) {
+        return $background_image ? 'background-image: url('.$image[0].');' . ($height?'min-height:'.$image[2].'px':'') : $image[0];
+    }
+}
 
 //images sizes
 //add_image_size( 'example_name', '960', '540', true );
