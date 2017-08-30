@@ -144,6 +144,13 @@ function tt_add_scripts() {
 }
 add_action('wp_enqueue_scripts', 'tt_add_scripts');
 
+function admin_pagination(){
+    global $wp_query;
+    $per_page = 99;
+    $wp_query->query('showposts='. $per_page);
+ }
+add_action('admin_head', 'admin_pagination');
+
 //Style login page
 function custom_login_css()
 {
