@@ -22,8 +22,8 @@ if(is_date()){
         <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
             <div class="blogpost">
                 <?php if ( has_post_thumbnail() ) { ?>
-                    <div class="alignleft">
-                        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+                    <div class="thumb">
+                        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
                     </div>
                 <?php } ?>
                 <div class="excerpt">
