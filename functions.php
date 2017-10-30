@@ -88,20 +88,6 @@ add_action( 'wp_print_styles', 'voodoo_deregister_styles', 100 );
 function voodoo_deregister_styles() {
     wp_deregister_style( 'contact-form-7' );
 }
-//REMOVE AUTO-TOP
-if(defined('WPCF7_VERSION')) {
-    function maybe_reset_autop( $form ) {
-        $form_instance = WPCF7_ContactForm::get_current();
-        $manager = WPCF7_ShortcodeManager::get_instance();
-        $form_meta = get_post_meta( $form_instance->id(), '_form', true );
-        $form = $manager->do_shortcode( $form_meta );
-        $form_instance->set_properties( array(
-            'form' => $form
-        ) );
-        return $form;
-    }
-    add_filter( 'wpcf7_form_elements', 'maybe_reset_autop' );
-}
 
 
 //custom SEO title
@@ -118,15 +104,6 @@ function seo_title(){
     bloginfo('name');
 }
 
-// Disables Kses only for textarea saves
-foreach (array('pre_term_description', 'pre_link_description', 'pre_link_notes', 'pre_user_description') as $filter) {
-    remove_filter($filter, 'wp_filter_kses');
-}
-
-// Disables Kses only for textarea admin displays
-foreach (array('term_description', 'link_description', 'link_notes', 'user_description') as $filter) {
-    remove_filter($filter, 'wp_kses_data');
-}
 
 //Custom jQuery
 function tt_add_scripts() {
@@ -152,12 +129,6 @@ function custom_login_css()
 
 add_action('login_head', 'custom_login_css');
 
-function wp_IEhtml5_js () {
-    global $is_IE;
-    if ($is_IE)
-        echo '<!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><script src="//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script><![endif]--><!--[if lte IE 9]><link href="'.theme().'/style/animations-ie-fix.css" rel="stylesheet" /><![endif]-->';
-}
-add_action('wp_head', 'wp_IEhtml5_js');
 
 $bar = array(
     'name'          => 'Blog Sidebar',
