@@ -22,7 +22,7 @@ header('X-UA-Compatible: IE=Edge,chrome=1');
 <body <?php body_class(); ?>>
 <header>
     <div class="row">
-        <a href="<?php echo site_url(); ?>/" class="logo" style="background-image: url(<?php the_field('logo', 'option') ?>)"></a>
+        <a href="<?php echo site_url(); ?>/" class="logo" style="background-image: url()"></a>
         <nav>
             <?php wp_nav_menu(array('container' => false, 'items_wrap' => '<ul id="%1$s" class="box">%3$s</ul>', 'theme_location' => 'head_menu')); ?>
         </nav>
