@@ -36,7 +36,19 @@ function my_acf_init() {
 add_action( 'acf/init', 'my_acf_init' );
 
 //remove auto-top cf7
-define('WPCF7_AUTOP', false );
+if ( defined( 'WPCF7_VERSION' ) ) {
+	function maybe_reset_autop( $form ) {
+		$form_instance = WPCF7_ContactForm::get_current();
+		$manager       = WPCF7_FormTagsManager::get_instance();
+		$form_meta     = get_post_meta( $form_instance->id(), '_form', true );
+		$form          = $manager->replace_all( $form_meta );
+		$form_instance->set_properties( array(
+			'form' => $form
+		) );
+		return $form;
+	}
+	add_filter( 'wpcf7_form_elements', 'maybe_reset_autop' );
+}
 /* BEGIN: Theme config params*/
 define ('HOME_PAGE_ID', get_option('page_on_front'));
 define ('BLOG_ID', get_option('page_for_posts'));
