@@ -35,7 +35,8 @@ function my_acf_init() {
 }
 add_action( 'acf/init', 'my_acf_init' );
 
-
+//remove auto-top cf7
+define('WPCF7_AUTOP', false );
 /* BEGIN: Theme config params*/
 define ('HOME_PAGE_ID', get_option('page_on_front'));
 define ('BLOG_ID', get_option('page_for_posts'));
