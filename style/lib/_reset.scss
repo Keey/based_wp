@@ -360,6 +360,20 @@ ul {
   }
 }
 
+.ajax-loader {
+  height: 0;
+  width: 0;
+  &.is-active {
+    background: url('../img/spinner.gif');
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin: 0 auto;
+    background-size: cover;
+  }
+}
+
+
 a[href^=tel] {
 text-decoration:inherit;
 color: inherit;
