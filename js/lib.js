@@ -29,9 +29,9 @@ $('p').each(function() {
 });
 //cf7 valid
 $(document).ready(function () {
-    $(this).on('click', '.wpcf7-not-valid-tip', function(){
-        $(this).prev().trigger('focus');
-        $(this).fadeOut(500,function(){
+    $(this).on('hover', '.wpcf7-not-valid-tip', function () {
+       // $(this).prev().trigger('focus');
+        $(this).fadeOut(500, function () {
             $(this).remove();
         });
     });
