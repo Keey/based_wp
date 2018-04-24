@@ -127,7 +127,7 @@ function tt_add_scripts() {
     wp_enqueue_script('jquery',  theme(). '/js/jquery.js', false, null, false);
     wp_enqueue_script('font_js', theme().'/style/font/font.js', array('jquery'), '', true );
 	
-    wp_enqueue_script('fancybox',  'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js');	
+    wp_enqueue_script('fancybox',  '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js');	
     wp_enqueue_script('lib_min', theme().'/js/lib.js', array('jquery'), '', true );
     wp_enqueue_script('js_init', theme().'/js/init.js', array('jquery'), '', true );
 	
