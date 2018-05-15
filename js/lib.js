@@ -1,3 +1,9 @@
+var onReCaptchaSuccess = function() {
+	if (window.innerWidth < 768 && (/iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)) {
+		var destElementOffset = $('.g-recaptcha').position().top - window.innerWidth;
+		$('html, body').animate({ scrollTop: destElementOffset }, 0);
+	}
+}
 //selbel
 (function ($) {
     'use strict';
