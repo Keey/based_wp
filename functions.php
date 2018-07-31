@@ -220,16 +220,6 @@ if( function_exists('acf_add_options_page') ) {
         'redirect' => false,
         'icon_url' => 'dashicons-shield-alt',
     ));
-    acf_add_options_sub_page(array(
-        'page_title' => 'Header',
-        'menu_title' => 'Header',
-        'parent_slug' => 'acf-theme-settings',
-    ));
-    acf_add_options_sub_page(array(
-        'page_title' => 'Footer',
-        'menu_title' => 'Footer',
-        'parent_slug' => 'acf-theme-settings',
-    ));
 }
 
 //register menus
