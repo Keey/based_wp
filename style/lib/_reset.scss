@@ -202,6 +202,19 @@ html[xmlns] .cfx {
   float: right
 }
 
+img{
+  display: block;
+  &.aligncenter{
+    margin: 20px auto;
+  }
+  &.alignleft{
+    margin: 0 20px 20px 0;
+  }
+  &.alignright{
+    margin: 0 0 20px 20px;
+  }
+}
+
 .googlemap img {
   max-width: none
 }
@@ -251,7 +264,7 @@ textarea, button, a, input, .btn {
 
 body {
   position: relative;
-  font: 300 15px/20px $font;
+  font: 300 15px/1.2 $font;
   color: #999999;
   background: #fff;
   @include flexbox();
