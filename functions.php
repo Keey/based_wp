@@ -120,11 +120,12 @@ function seo_title(){
 
 //Custom jQuery
 function tt_add_scripts() {
-    if (!is_admin()) {
-        wp_deregister_script( 'jquery' );
-    }
-
-    wp_enqueue_script('jquery',  theme(). '/js/jquery.js', false, null, false);
+  if ( ! is_admin() ) {
+		wp_deregister_script( 'jquery' );
+		wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js' );
+		wp_enqueue_script( 'jquery' );
+	};
+	
     wp_enqueue_script('font_js', theme().'/style/font/font.js', array('jquery'), '', true );
 	
     wp_enqueue_script('fancybox',  '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js');	
