@@ -264,8 +264,8 @@ textarea, button, a, input, .btn {
 
 body {
   position: relative;
-  font: 300 15px/1.2 $font;
-  color: #999999;
+  font: $bodyFont;
+  color: $bodyColor;
   background: #fff;
   @include flexbox();
   @include flex-direction(column);
