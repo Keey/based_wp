@@ -8,7 +8,7 @@ header('X-UA-Compatible: IE=Edge,chrome=1');
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?php seo_title(); ?></title>
+    <title><?php the_title(); ?></title>
     <meta name="MobileOptimized" content="width"/>
     <meta name="HandheldFriendly" content="True"/>
     <meta name="viewport"
