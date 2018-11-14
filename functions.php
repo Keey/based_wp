@@ -103,21 +103,6 @@ function voodoo_deregister_styles() {
 }
 
 
-//custom SEO title
-function seo_title(){
-    global $post;
-    if($post->post_parent) {
-        $parent_title = get_the_title($post->post_parent);
-        echo wp_title('-', true, 'right') . $parent_title.' - ';
-    } elseif(class_exists('Woocommerce') && is_shop()) {
-        echo get_the_title(SHOP_ID) . ' - ';
-    } else {
-        wp_title('-', true, 'right');
-    }
-    bloginfo('name');
-}
-
-
 //Custom jQuery
 function tt_add_scripts() {
   if ( ! is_admin() ) {
