@@ -244,5 +244,9 @@ function image_src($id, $size = 'full', $background_image = false, $height = fal
     }
 }
 
+add_filter( 'get_the_archive_title', function( $title ){
+	return preg_replace('~^[^:]+: ~', '', $title );
+});
+
 //images sizes
 //add_image_size( 'example_name', '960', '540', true );
