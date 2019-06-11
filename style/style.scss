@@ -1,3 +1,41 @@
 @import "lib/mix","lib/variable","lib/reset";
 /*=== Start Style ===*/
+
+
+  nav {
+    > ul {
+      > li {
+        > ul {
+          background: #fff;
+          z-index: 999;
+          position: absolute;
+          //margin-left: -2.21%;
+          display: none;
+          -webkit-animation: slide 0.1s linear 0s normal;
+          animation: slide 0.1s linear 0s normal;
+          border-top: 2px solid #384c6c;
+        }
+        > ul > li {
+          display: block;
+          background: #fff;
+        }
+        > ul > li > a {
+          display: block;
+          color: #000;
+        }
+        &:hover > ul {
+          display: block;
+          -webkit-animation: slide 0.1s linear 0s normal;
+          animation: slide 0.1s linear 0s normal;
+        }
+        &:hover {
+          > ul li:hover > a {
+            background: #384c6c;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
 @import "lib/libs","lib/rwd";
