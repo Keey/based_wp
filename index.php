@@ -37,12 +37,16 @@ if(is_date()){
                 </div>
             </div>
         <?php endwhile;
-        //wp_pagenavi();
         endif;?>
     </article>
     <aside>
         <?php dynamic_sidebar('Blog Sidebar'); ?>
     </aside>
+      <?php  $args = array(
+            'prev_text' => __('<'),
+            'next_text' => __('>'),
+            );
+            the_posts_pagination($args); ?>
 </section>
 <?php get_footer(); ?>
 
